@@ -8,7 +8,7 @@ $controller = new OfferController();
 echo $controller->updateOffer();
 ?>
 
-<p>Mise à jour d'un utilisateur</p>
+<p>Mise à jour d'une annonce</p>
 <form method="post" action="offer_update.php" name ="offerUpdateForm">
     <label for="id">ID :</label>
     <input type="text" name="id">

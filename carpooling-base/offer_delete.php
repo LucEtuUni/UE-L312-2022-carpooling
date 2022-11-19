@@ -8,10 +8,10 @@ $controller = new OfferController();
 echo $controller->deleteOffer();
 ?>
 
-<p>Supression d'une annnonce</p>
+<p>Supression d'une annonce</p>
 <form method="post" action="offer_delete.php" name ="offerDeleteForm">
     <label for="id">Id :</label>
     <input type="text" name="id">
     <br />
-    <input type="submit" value="Supprimer une annnonce">
+    <input type="submit" value="Supprimer une annonce">
 </form>
