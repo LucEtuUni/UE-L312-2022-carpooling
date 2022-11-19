@@ -24,6 +24,11 @@ class Offer
         return $this->idOffer;
     }
 
+    public function setIdOffer(string $idOffer): void
+    {
+        $this->idOffer = $idOffer;
+    }
+
     public function getIdUser(): int
     {
         return $this->idUser;
