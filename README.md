@@ -2,5 +2,5 @@
 UE-L312-2022-carpooling
 Groupe 4
 Membre du groupe 4 :
-- Luc Lagerige
-- Florian Hochart
+- Luc L
+- Florian H
