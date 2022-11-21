@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Entities\Reservation;
-use DateTime;
 
 class ReservationService
 {
@@ -49,7 +48,7 @@ class ReservationService
     /**
      * Delete a reservation.
      */
-    public function deleteUser(string $id): bool
+    public function deleteReservation(string $id): bool
     {
         $isOk = false;
 

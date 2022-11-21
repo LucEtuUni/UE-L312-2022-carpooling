@@ -54,7 +54,7 @@ class OfferService
     /**
      * Delete an Offer.
      */
-    public function deleteUser(string $id): bool
+    public function deleteOffer(string $id): bool
     {
         $isOk = false;
 

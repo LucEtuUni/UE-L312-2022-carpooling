@@ -49,7 +49,7 @@ class CarService
     /**
      * Delete a car.
      */
-    public function deleteUser(string $id): bool
+    public function deleteCar(string $id): bool
     {
         $isOk = false;
 

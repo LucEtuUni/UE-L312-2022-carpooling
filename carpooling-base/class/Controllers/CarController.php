@@ -106,7 +106,7 @@ class CarController
         if (isset($_POST['id'])) {
             // Delete the car :
             $carService = new CarService();
-            $isOk = $carService->deletecar($_POST['id']);
+            $isOk = $carService->deleteCar($_POST['id']);
             if ($isOk) {
                 $html = 'Voiture supprimé avec succès.';
             } else {
