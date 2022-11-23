@@ -8,14 +8,13 @@ class Car
     private $brand;
     private $model;
     private $mineral;
-    private $idOwner;
 
-    public function getId(): string
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function setId(string $id): void
+    public function setId(int $id): void
     {
         $this->id = $id;
     }
@@ -48,15 +47,5 @@ class Car
     public function setMineral($mineral): void
     {
         $this->mineral = $mineral;
-    }
-
-    public function getIdOwner(): string
-    {
-        return $this->idOwner;
-    }
-
-    public function setIdOwner($idOwner): void
-    {
-        $this->idOwner = $idOwner;
     }
 }

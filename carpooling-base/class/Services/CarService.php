@@ -9,14 +9,14 @@ class CarService
     /**
      * Create or update a car.
      */
-    public function setCar(?string $id, string $brand, string $model, string $mineral, string $idOwner): bool
+    public function setCar(?string $id, string $brand, string $model, string $mineral): bool
     {
         $isOk = false;
 
         if (empty($id)) {
-            $isOk = $dataBaseService->createCar($brand, $model, $mineral, $idOwner);
+            $isOk = $dataBaseService->createCar($brand, $model, $mineral);
         } else {
-            $isOk = $dataBaseService->updateCar($id, $brand, $model, $mineral, $idOwner);
+            $isOk = $dataBaseService->updateCar($id, $brand, $model, $mineral);
         }
 
         return $isOk;
@@ -25,12 +25,12 @@ class CarService
     /**
      * Return all cars.
      */
-    public function getCar(): array
+    public function getCars(): array
     {
-        $car = [];
+        $cars = [];
 
         $dataBaseService = new DataBaseService();
-        $carDTO = $dataBaseService->getCar();
+        $carDTO = $dataBaseService->getCars();
         if (!empty($carDTO)) {
             foreach ($carDTO as $carDTO) {
                 $car = new Car();
@@ -38,12 +38,11 @@ class CarService
                 $car->setBrand($carDTO['brand']);
                 $car->setModel($carDTO['model']);
                 $car->setMineral($carDTO['mineral']);
-                $car->setIdOwner($carDTO['idOwner']);
-                $car[] = $car;
+                $cars[] = $car;
             }
         }
 
-        return $car;
+        return $cars;
     }
 
     /**

@@ -12,7 +12,7 @@ class DataBaseService
     const PORT = '3306';
     const DATABASE_NAME = 'carpooling';
     const MYSQL_USER = 'root';
-    const MYSQL_PASSWORD = 'password';
+    const MYSQL_PASSWORD = 'root';
 
     private $connection;
 
@@ -65,6 +65,40 @@ class DataBaseService
         }
 
         return $users;
+    }
+
+    /**
+     * Return all cars.
+     */
+    public function getCars(): array
+    {
+        $users = [];
+
+        $sql = 'SELECT * FROM cars';
+        $query = $this->connection->query($sql);
+        $results = $query->fetchAll(PDO::FETCH_ASSOC);
+        if (!empty($results)) {
+            $users = $results;
+        }
+
+        return $users;
+    }
+    
+    /**
+     * Return all offers.
+     */
+    public function getOffers(): array
+    {
+        $offers = [];
+        
+        $sql = 'SELECT * FROM offers';
+        $query = $this->connection->query($sql);
+        $results = $query->fetchAll(PDO::FETCH_ASSOC);
+        if (!empty($results)) {
+            $offers = $results;
+        }
+        
+        return $offers;
     }
 
     /**

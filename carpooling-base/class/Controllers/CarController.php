@@ -17,8 +17,7 @@ class CarController
         if (isset($_POST['id']) &&
         isset($_POST['brand']) &&
     isset($_POST['model']) &&
-    isset($_POST['mineral']) &&
-        isset($_POST['idOwner'])) {
+    isset($_POST['mineral'])) {
             // Create the car :
             $carService = new CarService();
             $isOk = $carService->setCar(
@@ -26,8 +25,7 @@ class CarController
                 $_POST['id'],
                 $_POST['brand'],
                 $_POST['model'] ,
-                $_POST['mineral'] ,
-                $_POST['idOwner']
+                $_POST['mineral']
             );
             if ($isOk) {
                 $html = 'Voiture créé avec succès.';
@@ -42,13 +40,13 @@ class CarController
     /**
      * Return the html for the read action.
      */
-    public function getCar(): string
+    public function getCars(): string
     {
         $html = '';
 
         // Get all car :
         $carService = new CarService();
-        $car = $carService->getCar();
+        $car = $carService->getCars();
 
         // Get html :
         foreach ($car as $car) {
@@ -56,8 +54,7 @@ class CarController
                 '#' . $car->getId() . ' ' .
                 $car->getBrand() . ' ' .
                 $car->getModel() . ' ' .
-                $car->getMineral() . ' ' .
-                $car->getIdOwner() . '<br />';
+                $car->getMineral() . '<br />';
         }
 
         return $html;
@@ -73,17 +70,15 @@ class CarController
         // If the form have been submitted :
         if (isset($_POST['id']) &&
             isset($_POST['brand']) &&
-        isset($_POST['model']) &&
-        isset($_POST['mineral']) &&
-            isset($_POST['idOwner'])) {
+            isset($_POST['model']) &&
+            isset($_POST['mineral'])) {
             // Update the car :
             $carService = new CarService();
             $isOk = $carService->setCar(
                $_POST['id'],
                 $_POST['brand'],
                 $_POST['model'] ,
-                $_POST['mineral'] ,
-                    $_POST['idOwner']
+                $_POST['mineral']
             );
             if ($isOk) {
                 $html = 'Voiture mis à jour avec succès.';
