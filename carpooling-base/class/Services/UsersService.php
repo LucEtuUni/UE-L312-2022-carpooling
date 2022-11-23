@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Entities\User;
+use App\Entities\Car;
 use DateTime;
 
 class UsersService
@@ -10,19 +11,20 @@ class UsersService
     /**
      * Create or update an user.
      */
-    public function setUser(?string $id, string $firstname, string $lastname, string $email, string $birthday): bool
+    public function setUser(?string $id, string $firstname, string $lastname, string $email, string $birthday): string
     {
-        $isOk = false;
-
+        $userId = '';
+        
         $dataBaseService = new DataBaseService();
         $birthdayDateTime = new DateTime($birthday);
         if (empty($id)) {
-            $isOk = $dataBaseService->createUser($firstname, $lastname, $email, $birthdayDateTime);
+            $userId = $dataBaseService->createUser($firstname, $lastname, $email, $birthdayDateTime);
         } else {
-            $isOk = $dataBaseService->updateUser($id, $firstname, $lastname, $email, $birthdayDateTime);
+            $dataBaseService->updateUser($id, $firstname, $lastname, $email, $birthdayDateTime);
+            $userId = $id;
         }
-
-        return $isOk;
+        
+        return $userId;
     }
 
     /**
@@ -45,6 +47,10 @@ class UsersService
                 if ($date !== false) {
                     $user->setbirthday($date);
                 }
+                // Get cars of this user :
+                $cars = $this->getUserCars($userDTO['id']);
+                $user->setCars($cars);
+                
                 $users[] = $user;
             }
         }
@@ -63,5 +69,45 @@ class UsersService
         $isOk = $dataBaseService->deleteUser($id);
 
         return $isOk;
+    }
+    
+    /**
+     * Create relation bewteen an user and his car.
+     */
+    public function setUserCar(string $userId, string $carId): bool
+    {
+        $isOk = false;
+        
+        $dataBaseService = new DataBaseService();
+        $isOk = $dataBaseService->setUserCar($userId, $carId);
+        
+        return $isOk;
+    }
+    
+    /**
+     * Get cars of given user id.
+     */
+    public function getUserCars(string $userId): array
+    {
+        $userCars = [];
+        
+        $dataBaseService = new DataBaseService();
+        
+        // Get relation users and cars :
+        $usersCarsDTO = $dataBaseService->getUserCars($userId);
+        if (!empty($usersCarsDTO)) {
+            foreach ($usersCarsDTO as $userCarDTO) {
+                $car = new Car();
+                $car->setId($userCarDTO['id']);
+                $car->setBrand($userCarDTO['brand']);
+                $car->setModel($userCarDTO['model']);
+                $car->setMineral($userCarDTO['mineral']);
+                $car->setColor($userCarDTO['color']);
+                $car->setNbrSlots($userCarDTO['nbrSlots']);
+                $userCars[] = $car;
+            }
+        }
+        
+        return $userCars;
     }
 }

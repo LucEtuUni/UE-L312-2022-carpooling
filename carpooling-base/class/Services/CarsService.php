@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Entities\Car;
 
-class CarService
+class CarsService
 {
     /**
      * Create or update a car.
@@ -32,12 +32,14 @@ class CarService
         $dataBaseService = new DataBaseService();
         $carDTO = $dataBaseService->getCars();
         if (!empty($carDTO)) {
-            foreach ($carDTO as $carDTO) {
+            foreach ($carDTO as $car) {
                 $car = new Car();
                 $car->setId($carDTO['id']);
                 $car->setBrand($carDTO['brand']);
                 $car->setModel($carDTO['model']);
                 $car->setMineral($carDTO['mineral']);
+                $car->setColor($carDTO['color']);
+                $car->setNbrSlots($carDTO['nbrSlots']);
                 $cars[] = $car;
             }
         }

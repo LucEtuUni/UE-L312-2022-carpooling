@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Services\ReservationService;
+use App\Services\ReservationsService;
 
 class ReservationController
 {
@@ -19,7 +19,7 @@ class ReservationController
         isset($_POST['isPaid'])
             ) {
             // Create the reservation :
-            $reservationService = new ReservationService();
+            $reservationService = new ReservationsService();
             $isOk = $reservationService->setReservation(
                 null,
                 $_POST['idOffer'],
@@ -44,7 +44,7 @@ class ReservationController
         $html = '';
 
         // Get all Reservation :
-        $reservationService = new ReservationService();
+        $reservationService = new ReservationsService();
         $reservation = $reservationService->getReservation();
 
         // Get html :
@@ -73,7 +73,7 @@ class ReservationController
         isset($_POST['idUser']) &&
         isset($_POST['isPaid'])) {
             // Update the reservation :
-            $ReservationService = new ReservationService();
+            $reservationService = new ReservationsService();
             $isOk = $reservationService->setReservation(
                 $_POST['id'],
                 $_POST['idOffer'],
@@ -100,7 +100,7 @@ class ReservationController
         // If the form have been submitted :
         if (isset($_POST['id'])) {
             // Delete the reservation :
-            $ReservationService = new ReservationService();
+            $reservationService = new ReservationsService();
             $isOk = $reservationService->deleteReservation($_POST['id']);
             if ($isOk) {
                 $html = 'Réservation supprimé avec succès.';

@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Services\CarService;
+use App\Services\CarsService;
 
 class CarController
 {
@@ -19,7 +19,7 @@ class CarController
     isset($_POST['model']) &&
     isset($_POST['mineral'])) {
             // Create the car :
-            $carService = new CarService();
+            $carService = new CarsService();
             $isOk = $carService->setCar(
                 null,
                 $_POST['id'],
@@ -45,7 +45,7 @@ class CarController
         $html = '';
 
         // Get all car :
-        $carService = new CarService();
+        $carService = new CarsService();
         $car = $carService->getCars();
 
         // Get html :
@@ -73,7 +73,7 @@ class CarController
             isset($_POST['model']) &&
             isset($_POST['mineral'])) {
             // Update the car :
-            $carService = new CarService();
+            $carService = new CarsService();
             $isOk = $carService->setCar(
                $_POST['id'],
                 $_POST['brand'],
@@ -81,9 +81,9 @@ class CarController
                 $_POST['mineral']
             );
             if ($isOk) {
-                $html = 'Voiture mis à jour avec succès.';
+                $html = 'Voiture mis � jour avec succ�s.';
             } else {
-                $html = 'Erreur lors de la mise à jour de la voiture.';
+                $html = 'Erreur lors de la mise � jour de la voiture.';
             }
         }
 
@@ -100,7 +100,7 @@ class CarController
         // If the form have been submitted :
         if (isset($_POST['id'])) {
             // Delete the car :
-            $carService = new CarService();
+            $carService = new CarsService();
             $isOk = $carService->deleteCar($_POST['id']);
             if ($isOk) {
                 $html = 'Voiture supprimé avec succès.';

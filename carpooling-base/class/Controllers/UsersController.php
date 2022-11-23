@@ -12,25 +12,34 @@ class UsersController
     public function createUser(): string
     {
         $html = '';
-
+        
         // If the form have been submitted :
         if (isset($_POST['firstname']) &&
             isset($_POST['lastname']) &&
             isset($_POST['email']) &&
-            isset($_POST['birthday'])) {
+            isset($_POST['birthday']) &&
+            isset($_POST['cars'])) {
             // Create the user :
             $usersService = new UsersService();
-            $isOk = $usersService->setUser(
+            $userId = $usersService->setUser(
                 null,
                 $_POST['firstname'],
                 $_POST['lastname'],
                 $_POST['email'],
                 $_POST['birthday']
-            );
-            if ($isOk) {
-                $html = 'Utilisateur créé avec succès.';
+                );
+            
+            // Create the user cars relations :
+            $isOk = true;
+            if (!empty($_POST['cars'])) {
+                foreach ($_POST['cars'] as $carId) {
+                    $isOk = $usersService->setUserCar($userId, $carId);
+                }
+            }
+            if ($userId && $isOk) {
+                $html = '<div class="alert alert-success" role="alert">User successfully created.</div>';
             } else {
-                $html = 'Erreur lors de la création de l\'utilisateur.';
+                $html = '<div class="alert alert-danger" role="alert">User creation failed.</div>';
             }
         }
 
@@ -51,11 +60,25 @@ class UsersController
         // Get html :
         foreach ($users as $user) {
             $html .=
-                '#' . $user->getId() . ' ' .
-                $user->getFirstname() . ' ' .
-                $user->getLastname() . ' ' .
-                $user->getEmail() . ' ' .
-                $user->getBirthday()->format('d-m-Y') . '<br />';
+                '<tr>'.
+                '<td>'.$user->getId().'</td>'.
+                '<td>'.$user->getFirstname().'</td>'.
+                '<td>'.$user->getLastname().'</td>'.
+                '<td>'.$user->getEmail().'</td>'.
+                '<td>'.$user->getBirthday()->format('d-m-Y').'</td>'.
+                '<td>';
+                
+            foreach($user->getCars() as $car) {
+                $html .=
+                    $car->getBrand().' '.
+                    $car->getModel().' | '.
+                    $car->getColor().' | '.
+                    $car->getNbrSlots().' seats | '.
+                    $car->getMineral().
+                '<br/>';
+            }
+            
+            $html .= '</td>';
         }
 
         return $html;
@@ -84,9 +107,9 @@ class UsersController
                 $_POST['birthday']
             );
             if ($isOk) {
-                $html = 'Utilisateur mis à jour avec succès.';
+                $html = '<div class="alert alert-success" role="alert">User successfully updated.</div>';
             } else {
-                $html = 'Erreur lors de la mise à jour de l\'utilisateur.';
+                $html = '<div class="alert alert-danger" role="alert">User update failed.</div>';
             }
         }
 
@@ -106,9 +129,9 @@ class UsersController
             $usersService = new UsersService();
             $isOk = $usersService->deleteUser($_POST['id']);
             if ($isOk) {
-                $html = 'Utilisateur supprimé avec succès.';
+                $html = '<div class="alert alert-success" role="alert">User successfully deleted.</div>';
             } else {
-                $html = 'Erreur lors de la supression de l\'utilisateur.';
+                $html = '<div class="alert alert-danger" role="alert">User delete failed.</div>';
             }
         }
 

@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Entities\Reservation;
 
-class ReservationService
+class ReservationsService
 {
     /**
      * Create or update a reservation.
@@ -32,7 +32,7 @@ class ReservationService
         $dataBaseService = new DataBaseService();
         $reservationDTO = $dataBaseService->getReservation();
         if (!empty($reservationDTO)) {
-            foreach ($reservationDTO as $reservationDTO) {
+            foreach ($reservationDTO as $reservation) {
                 $reservation = new Reservation();
                 $reservation->setId($reservationDTO['id']);
                 $reservation->setIdOffer($reservationDTO['idOffer']);

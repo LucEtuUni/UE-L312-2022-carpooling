@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Services\OfferService;
+use App\Services\OffersService;
 
 class OfferController
 {
@@ -24,7 +24,7 @@ class OfferController
             isset($_POST['dateArrival']) &&
             isset($_POST['isAvailable'])) {
             // Create the offer :
-            $offerService = new OfferService();
+            $offerService = new OffersService();
             $isOk = $offerService->setOffer(
                 null,
                 $_POST['name'],
@@ -55,7 +55,7 @@ class OfferController
         $html = '';
 
         // Get all offer :
-        $offerService = new OfferService();
+        $offerService = new OffersService();
         $offer = $offerService->getOffer();
 
         // Get html :
@@ -95,7 +95,7 @@ class OfferController
             isset($_POST['dateArrival']) &&
             isset($_POST['isAvailable'])) {
             // Update the offer :
-            $offerService = new OfferService();
+            $offerService = new OffersService();
             $isOk = $offerService->setOffer(
                $_POST['id'],
                 $_POST['name'],
@@ -128,7 +128,7 @@ class OfferController
         // If the form have been submitted :
         if (isset($_POST['id'])) {
             // Delete the offer :
-            $offerService = new OfferService();
+            $offerService = new OffersService();
             $isOk = $offerService->deleteoffer($_POST['id']);
             if ($isOk) {
                 $html = 'Offre supprimé avec succès.';

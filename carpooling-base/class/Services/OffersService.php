@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Entities\Offer;
 
-class OfferService
+class OffersService
 {
     /**
      * Create or update an offer.
