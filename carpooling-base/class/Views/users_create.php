@@ -3,8 +3,7 @@
     use App\Controllers\UsersController;
     use App\Services\CarsService;
     
-    require '../vendor/autoload.php';
-    include 'header.php';
+    require 'header.php';
     
     $controller = new UsersController();
     echo $controller->createUser();
@@ -58,15 +57,6 @@
     <input type="submit" class="btn btn-primary" value="Create user"/>
 </form>
 
-<?php include 'footer.php'; ?>
-
-
-
-
-
-
-
-
-
-
-
+<?php
+    require 'footer.php';
+?>

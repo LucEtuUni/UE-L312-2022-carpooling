@@ -1,8 +1,7 @@
 <?php
     use App\Controllers\UsersController;
     
-    require '../vendor/autoload.php';
-    include 'header.php';
+    require 'header.php';
     
     $controller = new UsersController();
     echo $controller->updateUser();
@@ -41,4 +40,6 @@
 </form>
 
 
-<?php include 'footer.php'; ?>
+<?php
+    require 'footer.php';
+?>

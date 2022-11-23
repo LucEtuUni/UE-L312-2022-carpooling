@@ -30,9 +30,9 @@ class ReservationsService
         $reservation = [];
 
         $dataBaseService = new DataBaseService();
-        $reservationDTO = $dataBaseService->getReservation();
-        if (!empty($reservationDTO)) {
-            foreach ($reservationDTO as $reservation) {
+        $reservationsDTO = $dataBaseService->getReservation();
+        if (!empty($reservationsDTO)) {
+            foreach ($reservationsDTO as $reservationDTO) {
                 $reservation = new Reservation();
                 $reservation->setId($reservationDTO['id']);
                 $reservation->setIdOffer($reservationDTO['idOffer']);

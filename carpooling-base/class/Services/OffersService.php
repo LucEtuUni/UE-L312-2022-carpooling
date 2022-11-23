@@ -30,9 +30,9 @@ class OffersService
         $offer = [];
 
         $dataBaseService = new DataBaseService();
-        $offerDTO = $dataBaseService->getOffer();
-        if (!empty($offerDTO)) {
-            foreach ($offerDTO as $offerDTO) {
+        $offersDTO = $dataBaseService->getOffer();
+        if (!empty($offersDTO)) {
+            foreach ($offersDTO as $offerDTO) {
                 $offer = new Offer();
                 $offer->setId($offerDTO['id']);
                 $offer->setIdCar($offerDTO['idCar']);

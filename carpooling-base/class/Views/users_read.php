@@ -1,8 +1,7 @@
 <?php
     use App\Controllers\UsersController;
     
-    require '../vendor/autoload.php';
-    include 'header.php';
+    require 'header.php';
 ?>
 
 <br/>
@@ -25,4 +24,6 @@
     ?>
 </table>
 
-<?php include 'footer.php'; ?>
+<?php
+    require 'footer.php';
+?>

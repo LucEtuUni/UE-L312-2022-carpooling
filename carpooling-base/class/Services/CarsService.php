@@ -30,9 +30,9 @@ class CarsService
         $cars = [];
 
         $dataBaseService = new DataBaseService();
-        $carDTO = $dataBaseService->getCars();
-        if (!empty($carDTO)) {
-            foreach ($carDTO as $car) {
+        $carsDTO = $dataBaseService->getCars();
+        if (!empty($carsDTO)) {
+            foreach ($carsDTO as $carDTO) {
                 $car = new Car();
                 $car->setId($carDTO['id']);
                 $car->setBrand($carDTO['brand']);

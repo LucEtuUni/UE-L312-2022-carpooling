@@ -1,8 +1,7 @@
 <?php
     use App\Controllers\UsersController;
     
-    require '../vendor/autoload.php';
-    include 'header.php';
+    require 'header.php';
     
     $controller = new UsersController();
     echo $controller->deleteUser();
@@ -21,4 +20,6 @@
     <input type="submit" class="btn btn-primary" value="Delete selected user"/>
 </form>
 
-<?php include 'footer.php'; ?>
+<?php
+    require 'footer.php';
+?>
