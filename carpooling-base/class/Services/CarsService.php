@@ -9,14 +9,15 @@ class CarsService
     /**
      * Create or update a car.
      */
-    public function setCar(?string $id, string $brand, string $model, string $mineral): bool
+    public function setCar(?string $id, string $brand, string $model, string $mineral, string $color, string $nbrSlots): bool
     {
         $isOk = false;
-
+        $dataBaseService = new DataBaseService();
+        
         if (empty($id)) {
-            $isOk = $dataBaseService->createCar($brand, $model, $mineral);
+            $isOk = $dataBaseService->createCar($brand, $model, $mineral, $color, $nbrSlots);
         } else {
-            $isOk = $dataBaseService->updateCar($id, $brand, $model, $mineral);
+            $isOk = $dataBaseService->updateCar($id, $brand, $model, $mineral, $color, $nbrSlots);
         }
 
         return $isOk;

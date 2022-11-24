@@ -16,6 +16,7 @@
     	<th>Email</th>
     	<th>Birthday</th>
     	<th>Cars</th>
+    	<th>Actions</th>
 	</tr>
 
     <?php

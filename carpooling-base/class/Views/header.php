@@ -45,11 +45,11 @@
                       Cars
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item" href="#">Create</a>
-                      <a class="dropdown-item" href="#">Read</a>
-                      <a class="dropdown-item" href="#">Update</a>
+                      <a class="dropdown-item" href="cars_create.php">Create</a>
+                      <a class="dropdown-item" href="cars_read.php">Read</a>
+                      <a class="dropdown-item" href="cars_update.php">Update</a>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Delete</a>
+                      <a class="dropdown-item" href="cars_delete.php">Delete</a>
                     </div>
                   </li>
                   

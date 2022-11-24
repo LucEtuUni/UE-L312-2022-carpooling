@@ -3,6 +3,10 @@
     
     require 'header.php';
     
+    if(!empty($_GET['id'])) {
+        $id = $_GET['id'];
+    } else $id = "";
+    
     $controller = new UsersController();
     echo $controller->updateUser();
     ?>
@@ -13,7 +17,7 @@
 <form method="post" action="users_update.php" name ="userUpdateForm">
     <div class="form-group">
         <label for="id">ID</label>
-        <input type="text" class="form-control" name="id" placeholder="Enter user ID">
+        <input type="text" class="form-control" name="id" placeholder="Enter user ID" value="<?php echo $id; ?>">
     </div>
     
     <div class="form-group">

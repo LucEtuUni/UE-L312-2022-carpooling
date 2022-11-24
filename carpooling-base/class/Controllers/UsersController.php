@@ -78,7 +78,12 @@ class UsersController
                 '<br/>';
             }
             
-            $html .= '</td>';
+            $html .= '</td>'.
+                     '<td>'.
+                     '<a href="users_update.php?id='.$user->getId().'">Update</a>'.
+                     ' | '.
+                     '<a href="users_delete.php?id='.$user->getId().'">Delete</a>'.
+                     '</td>';
         }
 
         return $html;

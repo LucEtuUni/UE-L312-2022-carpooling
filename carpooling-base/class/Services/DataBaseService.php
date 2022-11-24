@@ -56,6 +56,34 @@ class DataBaseService
 
         return $userId;
     }
+    
+    /**
+     * Create a car.
+     */
+    public function createCar(string $brand, string $model, string $mineral, string $color, string $nbrSlots): string
+    {
+        $carId = '';
+        $isOk = false;
+        
+        $data = [
+            'brand' => $brand,
+            'model' => $model,
+            'mineral' => $mineral,
+            'color' => $color,
+            'nbrSlots' => $nbrSlots,
+        ];
+        
+        
+        $sql = 'INSERT INTO cars (brand, model, mineral, color, nbrSlots) VALUES (:brand, :model, :mineral, :color, :nbrSlots)';
+        $query = $this->connection->prepare($sql);
+        $isOk = $query->execute($data);
+        
+        if ($isOk) {
+            $carId = $this->connection->lastInsertId();
+        }
+        
+        return $carId;
+    }
 
     /**
      * Return all users.
@@ -79,16 +107,16 @@ class DataBaseService
      */
     public function getCars(): array
     {
-        $users = [];
+        $cars = [];
 
         $sql = 'SELECT * FROM cars';
         $query = $this->connection->query($sql);
         $results = $query->fetchAll(PDO::FETCH_ASSOC);
         if (!empty($results)) {
-            $users = $results;
+            $cars = $results;
         }
 
-        return $users;
+        return $cars;
     }
     
     /**
@@ -128,6 +156,30 @@ class DataBaseService
 
         return $isOk;
     }
+    
+    /**
+     * Update a car.
+     */
+    public function updateCar(string $id, string $brand, string $model, string $mineral, string $color, string $nbrSlots): bool
+    {
+        $isOk = false;
+        
+        $data = [
+            'id' => $id,
+            'brand' => $brand,
+            'model' => $model,
+            'mineral' => $mineral,
+            'color' => $color,
+            'nbrSlots' => $nbrSlots,
+        ];
+        
+        
+        $sql = 'UPDATE cars SET brand = :brand, model = :model, mineral = :mineral, color = :color, nbrSlots = :nbrSlots WHERE id = :id;';
+        $query = $this->connection->prepare($sql);
+        $isOk = $query->execute($data);
+        
+        return $isOk;
+    }
 
     /**
      * Delete an user.
@@ -137,12 +189,29 @@ class DataBaseService
         $isOk = false;
 
         $data = [
-            'id' => $id,
+            'id' => $id
         ];
         $sql = 'DELETE FROM users WHERE id = :id;';
         $query = $this->connection->prepare($sql);
         $isOk = $query->execute($data);
 
+        return $isOk;
+    }
+    
+    /**
+     * Delete a car.
+     */
+    public function deleteCar(string $id): bool
+    {
+        $isOk = false;
+        
+        $data = [
+            'id' => $id
+        ];
+        $sql = 'DELETE FROM cars WHERE id = :id;';
+        $query = $this->connection->prepare($sql);
+        $isOk = $query->execute($data);
+        
         return $isOk;
     }
     
@@ -155,7 +224,7 @@ class DataBaseService
         
         $data = [
             'userId' => $userId,
-            'carId' => $carId,
+            'carId' => $carId
         ];
         $sql = 'INSERT INTO users_cars (user_id, car_id) VALUES (:userId, :carId)';
         $query = $this->connection->prepare($sql);
@@ -172,7 +241,7 @@ class DataBaseService
         $userCars = [];
         
         $data = [
-            'userId' => $userId,
+            'userId' => $userId
         ];
         $sql = '
             SELECT c.*
