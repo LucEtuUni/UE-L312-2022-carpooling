@@ -41,11 +41,11 @@
                       Cars
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item" href="#">Create</a>
-                      <a class="dropdown-item" href="#">Read</a>
-                      <a class="dropdown-item" href="#">Update</a>
+                      <a class="dropdown-item" href="class/Views/cars_create.php">Create</a>
+                      <a class="dropdown-item" href="class/Views/cars_read.php">Read</a>
+                      <a class="dropdown-item" href="class/Views/cars_update.php">Update</a>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Delete</a>
+                      <a class="dropdown-item" href="class/Views/cars_delete.php">Delete</a>
                     </div>
                   </li>
                   
@@ -54,11 +54,11 @@
                       Offers
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item" href="#">Create</a>
-                      <a class="dropdown-item" href="#">Read</a>
-                      <a class="dropdown-item" href="#">Update</a>
+                      <a class="dropdown-item" href="class/Views/offer_create.php">Create</a>
+                      <a class="dropdown-item" href="class/Views/offer_read.php">Read</a>
+                      <a class="dropdown-item" href="class/Views/offer_update.php">Update</a>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Delete</a>
+                      <a class="dropdown-item" href="class/Views/offer_delete.php">Delete</a>
                     </div>
                   </li>
                   
@@ -67,11 +67,11 @@
                       Reservations
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item" href="#">Create</a>
-                      <a class="dropdown-item" href="#">Read</a>
-                      <a class="dropdown-item" href="#">Update</a>
+                      <a class="dropdown-item" href="class/Views/reservation_create.php">Create</a>
+                      <a class="dropdown-item" href="class/Views/reservation_read.php">Read</a>
+                      <a class="dropdown-item" href="class/Views/reservation_update.php">Update</a>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Delete</a>
+                      <a class="dropdown-item" href="class/Views/reservation_delete.php">Delete</a>
                     </div>
                   </li>
                 </ul>

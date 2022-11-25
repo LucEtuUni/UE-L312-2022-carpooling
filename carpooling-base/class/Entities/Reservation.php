@@ -2,7 +2,7 @@
 
 namespace App\Entities;
 
-class Offer
+class Reservation
 {
     private $id;
     private $idOffer;

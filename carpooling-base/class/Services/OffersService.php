@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Entities\Offer;
-
+use DateTime;
 class OffersService
 {
     /**
@@ -12,9 +12,9 @@ class OffersService
     public function setOffer(?string $id, string $idCar, string $idPublisher, string $name, string $price, string $locationFrom, string $locationTo, string $dateDepart, string $dateArrival, bool $isAvailable): bool
     {
         $isOk = false;
-
+        $dataBaseService = new DataBaseService();
         if (empty($id)) {
-            $isOk = $dataBaseService->createOffer($idCar, $idPublisher, $name, $price, $locationFrom, $locationTo, $dateDepart, $dateArrival, $isAvailable);
+            $isOk = $dataBaseService->createOffer($idCar, $idPublisher, $name, $price, $locationFrom, $locationTo, $dateDepart, $dateArrival);
         } else {
             $isOk = $dataBaseService->updateOffer($id, $idCar, $idPublisher, $name, $price, $locationFrom, $locationTo, $dateDepart, $dateArrival, $isAvailable);
         }
@@ -30,7 +30,7 @@ class OffersService
         $offer = [];
 
         $dataBaseService = new DataBaseService();
-        $offersDTO = $dataBaseService->getOffer();
+        $offersDTO = $dataBaseService->getOffers();
         if (!empty($offersDTO)) {
             foreach ($offersDTO as $offerDTO) {
                 $offer = new Offer();
@@ -41,8 +41,14 @@ class OffersService
                 $offer->setPrice($offerDTO['price']);
                 $offer->setLocationFrom($offerDTO['locationFrom']);
                 $offer->setLocationTo($offerDTO['locationTo']);
-                $offer->setDateDepart($offerDTO['dateDepart']);
-                $offer->setDateArrival($offerDTO['dateArrival']);
+                $dateDepart= new DateTime($offerDTO['dateDepart']);
+                if ($dateDepart !== false) {
+                    $offer->setdateDepart($dateDepart);
+                }
+                $dateArrival = new DateTime($offerDTO['dateArrival']);
+                if ($dateArrival !== false) {
+                    $offer->setdateArrival($dateArrival);
+                }
                 $offer->setIsAvailable($offerDTO['isAvailable']);
                 $offer[] = $offer;
             }

@@ -21,21 +21,20 @@ class OfferController
             isset($_POST['locationFrom']) &&
             isset($_POST['locationTo']) &&
             isset($_POST['dateDepart']) &&
-            isset($_POST['dateArrival']) &&
-            isset($_POST['isAvailable'])) {
+            isset($_POST['dateArrival']) ) {
             // Create the offer :
             $offerService = new OffersService();
             $isOk = $offerService->setOffer(
                 null,
+                $_POST['idCar'] ,
+                $_POST['idPublisher'] ,
                 $_POST['name'],
-        $_POST['idCar'] ,
-        $_POST['idPublisher'] ,
             $_POST['price'],
             $_POST['locationFrom'] ,
             $_POST['locationTo'] ,
             $_POST['dateDepart'] ,
             $_POST['dateArrival'] ,
-            $_POST['isAvailable']
+            false
             );
             if ($isOk) {
                 $html = 'Offre créé avec succès.';
@@ -62,9 +61,9 @@ class OfferController
         foreach ($offer as $offer) {
             $html .=
                 '#' . $offer->getId() . ' ' .
-                $offer->getName() . ' ' .
                 $offer->getIdCar() . ' ' .
                 $offer->getIdPublisher() . ' ' .
+                $offer->getName() . ' ' .
                 $offer->getPrice() . ' ' .
                 $offer->getLocationFrom() . ' ' .
                 $offer->getLocationTo() . ' ' .

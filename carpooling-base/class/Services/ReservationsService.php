@@ -12,7 +12,7 @@ class ReservationsService
     public function setReservation(?string $id, string $idOffer, string $idUser, bool $isPaid): bool
     {
         $isOk = false;
-
+        $dataBaseService = new DataBaseService();
         if (empty($id)) {
             $isOk = $dataBaseService->createReservation($idOffer, $idUser, $isPaid);
         } else {
@@ -30,7 +30,7 @@ class ReservationsService
         $reservation = [];
 
         $dataBaseService = new DataBaseService();
-        $reservationsDTO = $dataBaseService->getReservation();
+        $reservationsDTO = $dataBaseService->getReservations();
         if (!empty($reservationsDTO)) {
             foreach ($reservationsDTO as $reservationDTO) {
                 $reservation = new Reservation();

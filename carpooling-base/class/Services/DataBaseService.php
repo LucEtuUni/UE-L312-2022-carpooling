@@ -86,6 +86,65 @@ class DataBaseService
     }
 
     /**
+     * Create a Reservation.
+     */
+    public function createReservation(string $idOffer, string $idUser): string
+    {
+        $reservationId = '';
+        $isOk = false;
+        $isPaid = false;
+        $data = [
+            'idOffer' => $idOffer,
+            'idUser' => $idUser,
+            'isPaid' => $isPaid
+        ];
+        
+        
+        $sql = 'INSERT INTO reservation (idOffer, idUser, isPaid) VALUES (:idOffer, :idUser, :isPaid)';
+        $query = $this->connection->prepare($sql);
+        $isOk = $query->execute($data);
+        
+        if ($isOk) {
+            $reservationId = $this->connection->lastInsertId();
+        }
+        
+        return $reservationId;
+    }
+
+    /**
+     * Create an offer.
+     */
+    public function createOffer(string $idCar, string $idPublisher, string $name, string $price, string $locationFrom, string $locationTo, string $dateDepart, string $dateArrival): string
+    {
+        $isAvailable = true;
+        $offerId = '';
+        $isOk = false;
+        
+        $data = [
+            'idCar' => $idCar,
+            'idPublisher' => $idPublisher,
+            'names' => $name,
+            'price' => $price,
+            'locationFrom' => $locationFrom,
+            'locationTo' => $locationTo,
+            'dateDepart' => $dateDepart,
+            'dateArrival' => $dateArrival,
+            'isAvailable' => $isAvailable,
+        ];
+        
+        
+        $sql = 'INSERT INTO offer (idCar, idPublisher, name, price, locationFrom, locationTo, dateDepart, dateArrival, isAvailable) VALUES (:idCar, :idPublisher, :names, :price, :locationFrom, :locationTo, :dateDepart, :dateArrival, :isAvailable)';
+        $query = $this->connection->prepare($sql);
+        $isOk = $query->execute($data);
+        
+        if ($isOk) {
+            $offerId = $this->connection->lastInsertId();
+        }
+        
+        return $offerId;
+    }
+
+    /**
      * Return all users.
      */
     public function getUsers(): array
@@ -120,13 +179,30 @@ class DataBaseService
     }
     
     /**
+     * Return all reservations.
+     */
+    public function getReservations(): array
+    {
+        $cars = [];
+
+        $sql = 'SELECT * FROM reservation';
+        $query = $this->connection->query($sql);
+        $results = $query->fetchAll(PDO::FETCH_ASSOC);
+        if (!empty($results)) {
+            $cars = $results;
+        }
+
+        return $cars;
+    }
+
+    /**
      * Return all offers.
      */
     public function getOffers(): array
     {
         $offers = [];
         
-        $sql = 'SELECT * FROM offers';
+        $sql = 'SELECT * FROM offer';
         $query = $this->connection->query($sql);
         $results = $query->fetchAll(PDO::FETCH_ASSOC);
         if (!empty($results)) {
@@ -182,6 +258,58 @@ class DataBaseService
     }
 
     /**
+     * Update a reservation.
+     */
+    public function updateReservation(string $id, string $idOffer, string $idUser, bool $isPaid): bool
+    {
+        $isOk = false;
+        
+        $data = [
+            'id' => $id,
+            'idOffer' => $idOffer,
+            'idUser' => $idUser,
+            'isPaid' => $isPaid
+        ];
+        
+        
+        $sql = 'UPDATE reservation SET idOffer = :idOffer, idUser = :idUser, isPaid = :isPaid WHERE id = :id;';
+        $query = $this->connection->prepare($sql);
+        $isOk = $query->execute($data);
+        
+        return $isOk;
+    }
+
+     /**
+     * Update an offer.
+     */
+    public function updateOffer(string $id, string $idCar, string $idPublisher, string $name, string $price, string $locationFrom, string $locationTo, string $dateDepart, string $dateArrival, bool $isAvailable): bool
+    {
+        
+        $isOk = false;
+        
+        $data = [
+            'id' => $id,
+            'idCar' => $idCar,
+            'idPublisher' => $idPublisher,
+            'name' => $name,
+            'price' => $price,
+            'locationFrom' => $locationFrom,
+            'locationTo' => $locationTo,
+            'dateDepart' => $dateDepart,
+            'dateArrival' => $dateArrival,
+            'isAvailable' => $isAvailable,
+        ];
+        
+        
+        $sql = 'UPDATE offer SET  idCar = :idCar, idPublisher = :idPublisher, `name` = :`name`, price = :price, locationFrom = :locationFrom, locationTo = :locationTo, dateDepart = :dateDepart, dateArrival = :dateArrival, isAvailable = :isAvailable WHERE id = :id;';
+        $query = $this->connection->prepare($sql);
+        $isOk = $query->execute($data);
+        
+        
+        return $isOk;
+    }
+
+    /**
      * Delete an user.
      */
     public function deleteUser(string $id): bool
@@ -209,6 +337,40 @@ class DataBaseService
             'id' => $id
         ];
         $sql = 'DELETE FROM cars WHERE id = :id;';
+        $query = $this->connection->prepare($sql);
+        $isOk = $query->execute($data);
+        
+        return $isOk;
+    }
+    
+      /**
+     * Delete a reservation.
+     */
+    public function deleteReservation(string $id): bool
+    {
+        $isOk = false;
+        
+        $data = [
+            'id' => $id
+        ];
+        $sql = 'DELETE FROM reservation WHERE id = :id;';
+        $query = $this->connection->prepare($sql);
+        $isOk = $query->execute($data);
+        
+        return $isOk;
+    }
+    
+      /**
+     * Delete an offer.
+     */
+    public function deleteOffer(string $id): bool
+    {
+        $isOk = false;
+        
+        $data = [
+            'id' => $id
+        ];
+        $sql = 'DELETE FROM offer WHERE id = :id;';
         $query = $this->connection->prepare($sql);
         $isOk = $query->execute($data);
         
