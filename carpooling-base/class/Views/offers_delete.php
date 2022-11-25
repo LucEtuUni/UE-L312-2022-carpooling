@@ -14,16 +14,16 @@
 ?>
 
 <br/>
-<p class="h1">Supprimer une Offre</p>
+<p class="h1">Delete an offer</p>
 <br/>
 
-<form method="post" action="offer_delete.php" name ="offerDeleteForm">
+<form method="post" action="offers_delete.php" name ="offerDeleteForm">
     <div class="form-group">
         <label for="id">ID</label>
         <input type="text" class="form-control" name="id" placeholder="Enter Offer ID" value="<?php echo $id; ?>">
     </div>
     
-    <input type="submit" class="btn btn-primary" value="Supprimer l'Offre"/>
+    <input type="submit" class="btn btn-primary" value="Delete selected offer"/>
 </form>
 
 <?php

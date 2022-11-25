@@ -14,16 +14,17 @@
 ?>
 
 <br/>
-<p class="h1">Supprimer une réservation</p>
+<p class="h1">Delete a reservation</p>
 <br/>
 
-<form method="post" action="reservation_delete.php" name ="reservationDeleteForm">
+<form method="post" action="reservations_delete.php" name ="reservationDeleteForm">
+
     <div class="form-group">
         <label for="id">ID</label>
         <input type="text" class="form-control" name="id" placeholder="Enter reservation ID" value="<?php echo $id; ?>">
     </div>
     
-    <input type="submit" class="btn btn-primary" value="Supprimer la reservation"/>
+    <input type="submit" class="btn btn-primary" value="Delete selected reservation"/>
 </form>
 
 <?php

@@ -5,19 +5,21 @@
 ?>
 
 <br/>
-<p class="h1">Reservation</p>
+<p class="h1">View of "reservations" table</p>
 <br/>
 
 <table>
 	<tr>
-		<th>IdOffre</th>
-    	<th>IdUtilisateur</th>
-    	<th>est Payé</th>
+		<th>Reservation ID</th>
+		<th>Offer ID</th>
+    	<th>Buyer ID</th>
+    	<th>Is paid?</th>
+    	<th>Actions</th>
 	</tr>
 
     <?php
         $controller = new ReservationController();
-        echo $controller->getReservation();
+        echo $controller->getReservations();
     ?>
 </table>
 

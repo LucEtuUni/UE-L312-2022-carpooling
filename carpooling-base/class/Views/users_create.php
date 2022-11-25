@@ -13,7 +13,7 @@
 ?>
 
 <br/>
-<p class="h1">Create user</p>
+<p class="h1">Create a user</p>
 <br/>
 
 <form method="post" action="users_create.php" name ="userCreateForm">

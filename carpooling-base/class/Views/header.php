@@ -58,11 +58,11 @@
                       Offers
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item" href="offer_create.php">Create</a>
-                      <a class="dropdown-item" href="offer_read.php">Read</a>
-                      <a class="dropdown-item" href="offer_update.php">Update</a>
+                      <a class="dropdown-item" href="offers_create.php">Create</a>
+                      <a class="dropdown-item" href="offers_read.php">Read</a>
+                      <a class="dropdown-item" href="offers_update.php">Update</a>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="offer_delete.php">Delete</a>
+                      <a class="dropdown-item" href="offers_delete.php">Delete</a>
                     </div>
                   </li>
                   
@@ -71,11 +71,11 @@
                       Reservations
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item" href="reservation_create.php">Create</a>
-                      <a class="dropdown-item" href="reservation_read.php">Read</a>
-                      <a class="dropdown-item" href="reservation_update.php">Update</a>
+                      <a class="dropdown-item" href="reservations_create.php">Create</a>
+                      <a class="dropdown-item" href="reservations_read.php">Read</a>
+                      <a class="dropdown-item" href="reservations_update.php">Update</a>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="reservation_delete.php">Delete</a>
+                      <a class="dropdown-item" href="reservations_delete.php">Delete</a>
                     </div>
                   </li>
                 </ul>

@@ -88,19 +88,18 @@ class DataBaseService
     /**
      * Create a Reservation.
      */
-    public function createReservation(string $idOffer, string $idUser): string
+    public function createReservation(string $idOffer, string $idUser, string $isPaid): string
     {
         $reservationId = '';
         $isOk = false;
-        $isPaid = false;
         $data = [
             'idOffer' => $idOffer,
-            'idUser' => $idUser,
+            'idBuyer' => $idUser,
             'isPaid' => $isPaid
         ];
         
         
-        $sql = 'INSERT INTO reservation (idOffer, idUser, isPaid) VALUES (:idOffer, :idUser, :isPaid)';
+        $sql = 'INSERT INTO reservations (idOffer, idBuyer, isPaid) VALUES (:idOffer, :idBuyer, :isPaid)';
         $query = $this->connection->prepare($sql);
         $isOk = $query->execute($data);
         
@@ -123,7 +122,7 @@ class DataBaseService
         $data = [
             'idCar' => $idCar,
             'idPublisher' => $idPublisher,
-            'names' => $name,
+            'name' => $name,
             'price' => $price,
             'locationFrom' => $locationFrom,
             'locationTo' => $locationTo,
@@ -133,7 +132,7 @@ class DataBaseService
         ];
         
         
-        $sql = 'INSERT INTO offer (idCar, idPublisher, name, price, locationFrom, locationTo, dateDepart, dateArrival, isAvailable) VALUES (:idCar, :idPublisher, :names, :price, :locationFrom, :locationTo, :dateDepart, :dateArrival, :isAvailable)';
+        $sql = 'INSERT INTO offers (idCar, idPublisher, name, price, locationFrom, locationTo, dateDepart, dateArrival, isAvailable) VALUES (:idCar, :idPublisher, :name, :price, :locationFrom, :locationTo, :dateDepart, :dateArrival, :isAvailable)';
         $query = $this->connection->prepare($sql);
         $isOk = $query->execute($data);
         
@@ -185,7 +184,7 @@ class DataBaseService
     {
         $cars = [];
 
-        $sql = 'SELECT * FROM reservation';
+        $sql = 'SELECT * FROM reservations';
         $query = $this->connection->query($sql);
         $results = $query->fetchAll(PDO::FETCH_ASSOC);
         if (!empty($results)) {
@@ -202,7 +201,7 @@ class DataBaseService
     {
         $offers = [];
         
-        $sql = 'SELECT * FROM offer';
+        $sql = 'SELECT * FROM offers';
         $query = $this->connection->query($sql);
         $results = $query->fetchAll(PDO::FETCH_ASSOC);
         if (!empty($results)) {
@@ -260,19 +259,19 @@ class DataBaseService
     /**
      * Update a reservation.
      */
-    public function updateReservation(string $id, string $idOffer, string $idUser, bool $isPaid): bool
+    public function updateReservation(string $id, string $idOffer, string $idBuyer, bool $isPaid): bool
     {
         $isOk = false;
         
         $data = [
             'id' => $id,
             'idOffer' => $idOffer,
-            'idUser' => $idUser,
+            'idBuyer' => $idBuyer,
             'isPaid' => $isPaid
         ];
         
         
-        $sql = 'UPDATE reservation SET idOffer = :idOffer, idUser = :idUser, isPaid = :isPaid WHERE id = :id;';
+        $sql = 'UPDATE reservations SET idOffer = :idOffer, idBuyer = :idBuyer, isPaid = :isPaid WHERE id = :id;';
         $query = $this->connection->prepare($sql);
         $isOk = $query->execute($data);
         
@@ -301,7 +300,7 @@ class DataBaseService
         ];
         
         
-        $sql = 'UPDATE offer SET  idCar = :idCar, idPublisher = :idPublisher, `name` = :`name`, price = :price, locationFrom = :locationFrom, locationTo = :locationTo, dateDepart = :dateDepart, dateArrival = :dateArrival, isAvailable = :isAvailable WHERE id = :id;';
+        $sql = 'UPDATE offers SET  idCar = :idCar, idPublisher = :idPublisher, `name` = :`name`, price = :price, locationFrom = :locationFrom, locationTo = :locationTo, dateDepart = :dateDepart, dateArrival = :dateArrival, isAvailable = :isAvailable WHERE id = :id;';
         $query = $this->connection->prepare($sql);
         $isOk = $query->execute($data);
         
@@ -353,7 +352,7 @@ class DataBaseService
         $data = [
             'id' => $id
         ];
-        $sql = 'DELETE FROM reservation WHERE id = :id;';
+        $sql = 'DELETE FROM reservations WHERE id = :id;';
         $query = $this->connection->prepare($sql);
         $isOk = $query->execute($data);
         
@@ -370,7 +369,7 @@ class DataBaseService
         $data = [
             'id' => $id
         ];
-        $sql = 'DELETE FROM offer WHERE id = :id;';
+        $sql = 'DELETE FROM offers WHERE id = :id;';
         $query = $this->connection->prepare($sql);
         $isOk = $query->execute($data);
         

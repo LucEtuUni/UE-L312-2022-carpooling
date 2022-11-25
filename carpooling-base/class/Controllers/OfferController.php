@@ -15,8 +15,8 @@ class OfferController
 
         // If the form have been submitted :
         if (isset($_POST['name']) &&
-        isset($_POST['idCar']) &&
-        isset($_POST['idPublisher']) &&
+            isset($_POST['idCar']) &&
+            isset($_POST['idPublisher']) &&
             isset($_POST['price']) &&
             isset($_POST['locationFrom']) &&
             isset($_POST['locationTo']) &&
@@ -29,17 +29,17 @@ class OfferController
                 $_POST['idCar'] ,
                 $_POST['idPublisher'] ,
                 $_POST['name'],
-            $_POST['price'],
-            $_POST['locationFrom'] ,
-            $_POST['locationTo'] ,
-            $_POST['dateDepart'] ,
-            $_POST['dateArrival'] ,
-            false
+                $_POST['price'],
+                $_POST['locationFrom'] ,
+                $_POST['locationTo'] ,
+                $_POST['dateDepart'] ,
+                $_POST['dateArrival'] ,
+                false
             );
             if ($isOk) {
-                $html = 'Offre créé avec succès.';
+                $html = '<div class="alert alert-success" role="alert">Offer successfully created.</div>';
             } else {
-                $html = 'Erreur lors de la création de l\'offre.';
+                $html = '<div class="alert alert-danger" role="alert">Offer creation failed.</div>';
             }
         }
 
@@ -49,27 +49,33 @@ class OfferController
     /**
      * Return the html for the read action.
      */
-    public function getOffer(): string
+    public function getOffers(): string
     {
         $html = '';
 
         // Get all offer :
         $offerService = new OffersService();
-        $offer = $offerService->getOffer();
+        $offers = $offerService->getOffers();
 
         // Get html :
-        foreach ($offer as $offer) {
-            $html .=
-                '#' . $offer->getId() . ' ' .
-                $offer->getIdCar() . ' ' .
-                $offer->getIdPublisher() . ' ' .
-                $offer->getName() . ' ' .
-                $offer->getPrice() . ' ' .
-                $offer->getLocationFrom() . ' ' .
-                $offer->getLocationTo() . ' ' .
-                $offer->getDateDepart() . ' ' .
-                $offer->getDateArrival() . ' ' .
-                $offer->getIsAvailable() . '<br />';
+        foreach ($offers as $offer) {
+                $html .=
+                '<tr>'.
+                '<td>'.$offer->getId().'</td>'.
+                '<td>'.$offer->getIdCar().'</td>'.
+                '<td>'.$offer->getIdPublisher().'</td>'.
+                '<td>'.$offer->getName().'</td>'.
+                '<td>'.$offer->getPrice().'</td>'.
+                '<td>'.$offer->getLocationFrom().'</td>'.
+                '<td>'.$offer->getLocationTo().'</td>'.
+                '<td>'.$offer->getDateDepart()->format('d/m/Y - H:i').'</td>'.
+                '<td>'.$offer->getDateArrival()->format('d/m/Y - H:i').'</td>'.
+                '<td>'.$offer->isAvailable().'</td>'.
+                '<td>'.
+                '<a href="offers_update.php?id='.$offer->getId().'">Update</a>'.
+                ' | '.
+                '<a href="offers_delete.php?id='.$offer->getId().'">Delete</a>'.
+                '</td>';
         }
 
         return $html;
@@ -108,9 +114,9 @@ class OfferController
                     $_POST['isAvailable']
             );
             if ($isOk) {
-                $html = 'Offre mis à jour avec succès.';
+                $html = '<div class="alert alert-success" role="alert">Offer successfully updated.</div>';
             } else {
-                $html = 'Erreur lors de la mise à jour de l\'offre.';
+                $html = '<div class="alert alert-danger" role="alert">Offer update failed.</div>';
             }
         }
 
@@ -130,9 +136,9 @@ class OfferController
             $offerService = new OffersService();
             $isOk = $offerService->deleteoffer($_POST['id']);
             if ($isOk) {
-                $html = 'Offre supprimé avec succès.';
+                $html = '<div class="alert alert-success" role="alert">Offer successfully deletec.</div>';
             } else {
-                $html = 'Erreur lors de la supression de l\'offre.';
+                $html = '<div class="alert alert-danger" role="alert">Offer deletion failed.</div>';
             }
         }
 

@@ -15,21 +15,19 @@ class ReservationController
 
         // If the form have been submitted :
         if (isset($_POST['idOffer']) &&
-        isset($_POST['idUser']) &&
-        isset($_POST['isPaid'])
-            ) {
+            isset($_POST['idBuyer'])) {
             // Create the reservation :
             $reservationService = new ReservationsService();
             $isOk = $reservationService->setReservation(
                 null,
                 $_POST['idOffer'],
-                $_POST['idUser'] ,
-                $_POST['isPaid'] 
+                $_POST['idBuyer'] ,
+                "0"
             );
             if ($isOk) {
-                $html = 'Reservation créé avec succès.';
+                $html = '<div class="alert alert-success" role="alert">Reservation successfully created.</div>';
             } else {
-                $html = 'Erreur lors de la création de la réservation.';
+                $html = '<div class="alert alert-danger" role="alert">Reservation creation failed.</div>';
             }
         }
 
@@ -39,22 +37,30 @@ class ReservationController
     /**
      * Return the html for the read action.
      */
-    public function getReservation(): string
+    public function getReservations(): string
     {
         $html = '';
 
         // Get all Reservation :
         $reservationService = new ReservationsService();
-        $reservation = $reservationService->getReservation();
+        $reservations = $reservationService->getReservations();
 
         // Get html :
-        foreach ($reservation as $reservation) {
+        foreach ($reservations as $reservation) {
+            $stringPaid = 'Not paid';
+            if($reservation->isPaid()) $stringPaid = 'Paid';
+            
             $html .=
-                '#' . $reservation->getId() . ' ' .
-                $reservation->getIdOffer() . ' ' .
-                $reservation->getIdUser() . ' ' .
-                $reservation->getIsPaid() . ' ' .
-                 '<br />';
+            '<tr>'.
+            '<td>'.$reservation->getId().'</td>'.
+            '<td>'.$reservation->getIdOffer().'</td>'.
+            '<td>'.$reservation->getIdUser().'</td>'.
+            '<td>'.$stringPaid.'</td>'.
+            '<td>'.
+            '<a href="reservations_update.php?id='.$reservation->getId().'">Update</a>'.
+            ' | '.
+            '<a href="reservations_delete.php?id='.$reservation->getId().'">Delete</a>'.
+            '</td>';
         }
 
         return $html;
@@ -69,21 +75,21 @@ class ReservationController
 
         // If the form have been submitted :
         if (isset($_POST['id']) &&
-        isset($_POST['idOffer']) &&
-        isset($_POST['idUser']) &&
-        isset($_POST['isPaid'])) {
+            isset($_POST['idOffer']) &&
+            isset($_POST['idBuyer']) &&
+            isset($_POST['isPaid'])) {
             // Update the reservation :
             $reservationService = new ReservationsService();
             $isOk = $reservationService->setReservation(
                 $_POST['id'],
                 $_POST['idOffer'],
-                $_POST['idUser'] ,
+                $_POST['idBuyer'] ,
                 $_POST['isPaid'] 
             );
             if ($isOk) {
-                $html = 'Réservation mis à jour avec succès.';
+                $html = '<div class="alert alert-success" role="alert">Reservation successfully updated.</div>';
             } else {
-                $html = 'Erreur lors de la mise à jour de réservation.';
+                $html = '<div class="alert alert-danger" role="alert">Reservation update failed.</div>';
             }
         }
 
@@ -103,9 +109,9 @@ class ReservationController
             $reservationService = new ReservationsService();
             $isOk = $reservationService->deleteReservation($_POST['id']);
             if ($isOk) {
-                $html = 'Réservation supprimé avec succès.';
+                $html = '<div class="alert alert-success" role="alert">Reservation successfully deleted.</div>';
             } else {
-                $html = 'Erreur lors de la supression de la réservation.';
+                $html = '<div class="alert alert-danger" role="alert">Reservation deletion failed.</div>';
             }
         }
 

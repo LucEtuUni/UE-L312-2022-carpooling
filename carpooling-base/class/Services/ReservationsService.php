@@ -9,14 +9,14 @@ class ReservationsService
     /**
      * Create or update a reservation.
      */
-    public function setReservation(?string $id, string $idOffer, string $idUser, bool $isPaid): bool
+    public function setReservation(?string $id, string $idOffer, string $idBuyer, string $isPaid): bool
     {
         $isOk = false;
         $dataBaseService = new DataBaseService();
         if (empty($id)) {
-            $isOk = $dataBaseService->createReservation($idOffer, $idUser, $isPaid);
+            $isOk = $dataBaseService->createReservation($idOffer, $idBuyer, $isPaid);
         } else {
-            $isOk = $dataBaseService->updateReservation($id, $idOffer, $idUser, $isPaid);
+            $isOk = $dataBaseService->updateReservation($id, $idOffer, $idBuyer, $isPaid);
         }
 
         return $isOk;
@@ -25,9 +25,9 @@ class ReservationsService
     /**
      * Return all reservation.
      */
-    public function getReservation(): array
+    public function getReservations(): array
     {
-        $reservation = [];
+        $reservations = [];
 
         $dataBaseService = new DataBaseService();
         $reservationsDTO = $dataBaseService->getReservations();
@@ -36,13 +36,13 @@ class ReservationsService
                 $reservation = new Reservation();
                 $reservation->setId($reservationDTO['id']);
                 $reservation->setIdOffer($reservationDTO['idOffer']);
-                $reservation->setIdUser($reservationDTO['idUser']);
+                $reservation->setIdUser($reservationDTO['idBuyer']);
                 $reservation->setIsPaid($reservationDTO['isPaid']);
-                $reservation[] = $reservation;
+                $reservations[] = $reservation;
             }
         }
 
-        return $reservation;
+        return $reservations;
     }
 
     /**

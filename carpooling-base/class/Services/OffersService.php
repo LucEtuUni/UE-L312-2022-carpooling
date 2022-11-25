@@ -25,9 +25,9 @@ class OffersService
     /**
      * Return all offer.
      */
-    public function getOffer(): array
+    public function getOffers(): array
     {
-        $offer = [];
+        $offers = [];
 
         $dataBaseService = new DataBaseService();
         $offersDTO = $dataBaseService->getOffers();
@@ -50,11 +50,11 @@ class OffersService
                     $offer->setdateArrival($dateArrival);
                 }
                 $offer->setIsAvailable($offerDTO['isAvailable']);
-                $offer[] = $offer;
+                $offers[] = $offer;
             }
         }
 
-        return $offer;
+        return $offers;
     }
 
     /**

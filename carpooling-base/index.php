@@ -54,11 +54,11 @@
                       Offers
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item" href="class/Views/offer_create.php">Create</a>
-                      <a class="dropdown-item" href="class/Views/offer_read.php">Read</a>
-                      <a class="dropdown-item" href="class/Views/offer_update.php">Update</a>
+                      <a class="dropdown-item" href="class/Views/offers_create.php">Create</a>
+                      <a class="dropdown-item" href="class/Views/offers_read.php">Read</a>
+                      <a class="dropdown-item" href="class/Views/offers_update.php">Update</a>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="class/Views/offer_delete.php">Delete</a>
+                      <a class="dropdown-item" href="class/Views/offers_delete.php">Delete</a>
                     </div>
                   </li>
                   
@@ -67,11 +67,11 @@
                       Reservations
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item" href="class/Views/reservation_create.php">Create</a>
-                      <a class="dropdown-item" href="class/Views/reservation_read.php">Read</a>
-                      <a class="dropdown-item" href="class/Views/reservation_update.php">Update</a>
+                      <a class="dropdown-item" href="class/Views/reservations_create.php">Create</a>
+                      <a class="dropdown-item" href="class/Views/reservations_read.php">Read</a>
+                      <a class="dropdown-item" href="class/Views/reservations_update.php">Update</a>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="class/Views/reservation_delete.php">Delete</a>
+                      <a class="dropdown-item" href="class/Views/reservations_delete.php">Delete</a>
                     </div>
                   </li>
                 </ul>
@@ -82,7 +82,7 @@
 
     		
     	<div class="container">
-    		<h1>Index page</h1>
+    		<p class="h1 text-center">You're on the index page, please use the navbar.</p>
     	</div>
 		
 		
