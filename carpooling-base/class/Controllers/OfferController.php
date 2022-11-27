@@ -21,7 +21,8 @@ class OfferController
             isset($_POST['locationFrom']) &&
             isset($_POST['locationTo']) &&
             isset($_POST['dateDepart']) &&
-            isset($_POST['dateArrival']) ) {
+            isset($_POST['dateArrival']) && 
+            $_POST['dateDepart']<$_POST['dateArrival'] ) {
             // Create the offer :
             $offerService = new OffersService();
             $isOk = $offerService->setOffer(
@@ -41,7 +42,7 @@ class OfferController
             } else {
                 $html = '<div class="alert alert-danger" role="alert">Offer creation failed.</div>';
             }
-        }
+        } 
 
         return $html;
     }
@@ -98,7 +99,8 @@ class OfferController
             isset($_POST['locationTo']) &&
             isset($_POST['dateDepart']) &&
             isset($_POST['dateArrival']) &&
-            isset($_POST['isAvailable'])) {
+            isset($_POST['isAvailable']) && 
+            $_POST['dateDepart']<$_POST['dateArrival']) {
             // Update the offer :
             $offerService = new OffersService();
             $isOk = $offerService->setOffer(
@@ -118,7 +120,7 @@ class OfferController
             } else {
                 $html = '<div class="alert alert-danger" role="alert">Offer update failed.</div>';
             }
-        }
+        } 
 
         return $html;
     }
@@ -136,11 +138,12 @@ class OfferController
             $offerService = new OffersService();
             $isOk = $offerService->deleteoffer($_POST['id']);
             if ($isOk) {
-                $html = '<div class="alert alert-success" role="alert">Offer successfully deletec.</div>';
+                $html = '<div class="alert alert-success" role="alert">Offer successfully deleted.</div>';
             } else {
                 $html = '<div class="alert alert-danger" role="alert">Offer deletion failed.</div>';
             }
         }
+
 
         return $html;
     }

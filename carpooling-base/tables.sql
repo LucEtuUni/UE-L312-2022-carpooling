@@ -24,6 +24,36 @@ INSERT INTO `cars` (`id`, `brand`, `model`, `mineral`, `color`, `nbrSlots`) VALU
 (5,	'Nissan',	'GTR',	'FE-617-GQ',	'Purple',	5),
 (6,	'BMW',	'525d e60',	'WW-515-PF',	'Black',	5);
 
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `firstname` varchar(255) NOT NULL,
+  `lastname` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `birthday` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `birthday`) VALUES
+(2,	'Jean',	'Valjean',	'jeanvaljean@jvj.fr',	'1982-01-09 01:00:00'),
+(7,	'Luc',	'L',	'lucl@test.fr',	'2010-11-08 01:00:00'),
+(9,	'Florian',	'H',	'fh@fh.fr',	'2000-09-08 02:00:00');
+
+DROP TABLE IF EXISTS `users_cars`;
+CREATE TABLE `users_cars` (
+  `user_id` int NOT NULL,
+  `car_id` int NOT NULL,
+  KEY `user_id` (`user_id`),
+  KEY `car_id` (`car_id`),
+  CONSTRAINT `users_cars_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `users_cars_ibfk_2` FOREIGN KEY (`car_id`) REFERENCES `cars` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+INSERT INTO `users_cars` (`user_id`, `car_id`) VALUES
+(7,	1),
+(9,	1),
+(9,	2);
+
 DROP TABLE IF EXISTS `offers`;
 CREATE TABLE `offers` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -63,35 +93,5 @@ CREATE TABLE `reservations` (
 INSERT INTO `reservations` (`id`, `idOffer`, `idBuyer`, `isPaid`) VALUES
 (2,	2,	7,	0),
 (3,	1,	2,	0);
-
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE `users` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `firstname` varchar(255) NOT NULL,
-  `lastname` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `birthday` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-
-INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `birthday`) VALUES
-(2,	'Jean',	'Valjean',	'jeanvaljean@jvj.fr',	'1982-01-09 01:00:00'),
-(7,	'Luc',	'L',	'lucl@test.fr',	'2010-11-08 01:00:00'),
-(9,	'Florian',	'H',	'fh@fh.fr',	'2000-09-08 02:00:00');
-
-DROP TABLE IF EXISTS `users_cars`;
-CREATE TABLE `users_cars` (
-  `user_id` int NOT NULL,
-  `car_id` int NOT NULL,
-  KEY `user_id` (`user_id`),
-  KEY `car_id` (`car_id`),
-  CONSTRAINT `users_cars_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-  CONSTRAINT `users_cars_ibfk_2` FOREIGN KEY (`car_id`) REFERENCES `cars` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-INSERT INTO `users_cars` (`user_id`, `car_id`) VALUES
-(7,	1),
-(9,	1),
-(9,	2);
 
 -- 2022-11-25 23:39:10

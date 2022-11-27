@@ -34,8 +34,9 @@
     
     <div class="form-group">
     	<label for="birthday">Birthday</label>
-    	<input type="text" class="form-control" name="birthday" placeholder="Enter birthdate (format dd-mm-yyyy)">
+    	<input type="datetime-local" class="form-control" name="birthday" placeholder="Enter birthdate (format dd-mm-yyyy)">
     </div>
+    
     
     <div class="form-group">
     	<label for="cars">Car(s) :</label>
